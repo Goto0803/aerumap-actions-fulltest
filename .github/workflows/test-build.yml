@@ -2,8 +2,8 @@ name: Deploy to Firebase
 
 on:
   push:
-    branches:
-      - main
+    branches-ignore:
+      - "**"  # すべてのブランチを無視
 
 jobs:
   deploy:
@@ -24,3 +24,4 @@ jobs:
       - name: Deploy to Firebase
         working-directory: ./firebase
         run: firebase deploy --only functions,firestore --token "${{ secrets.FIREBASE_TOKEN }}"
+
