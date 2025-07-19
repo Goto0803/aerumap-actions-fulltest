@@ -1,0 +1,8 @@
+{
+  "hosting": {
+    "public": "../app/build"
+  },
+  "functions": {
+    "source": "functions"
+  }
+}
