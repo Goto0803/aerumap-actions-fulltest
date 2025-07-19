@@ -1,32 +1,30 @@
-name: Test Build and Deploy
+name: Deploy to Firebase
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+    paths:
+      - 'firebase/**'
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 18
 
-      - name: Install dependencies
-        run: npm ci
-        working-directory: app
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
 
-      - name: Build React app
-        run: CI=false npm run build
-        working-directory: app
-
-      - name: Deploy to Firebase Hosting
-        working-directory: .
+      - name: Deploy to Firebase
         run: |
-          npm install -g firebase-tools
-          firebase deploy --only hosting --token ${{ secrets.FIREBASE_TOKEN }}
+          cd firebase
+          firebase deploy --only functions,firestore --token "${{ secrets.FIREBASE_TOKEN }}"
+
