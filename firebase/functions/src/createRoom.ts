@@ -113,6 +113,7 @@ async function logAccess(ip: string, uid: string, success: boolean, error?: stri
  * ルーム作成API
  */
 export const createRoom = functions.https.onRequest(async (req: Request, res: Response) => {
+  console.log("✅ createRoom 関数：GitHub Actions による自動デプロイ確認ログ");
   // CORS設定
   res.set('Access-Control-Allow-Origin', 'https://aimap.app');
   res.set('Access-Control-Allow-Methods', 'POST');
