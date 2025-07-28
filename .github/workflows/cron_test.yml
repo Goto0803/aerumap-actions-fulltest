@@ -1,0 +1,13 @@
+name: Test Every 5 Minutes
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # 5分ごと（UTC）
+
+jobs:
+  run-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Hello from Arona
+        run: echo "動作確認だよ、先生！"
